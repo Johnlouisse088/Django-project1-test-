@@ -9,7 +9,7 @@
     </li>
       {% for topic in topics %}
     <li>
-      <a href="?q={{topic.name}}">{{topic.name}} <span>{{room_topic.count}}</span></a>
+      <a href="?q={{topic.name}}">{{topic.name}} <span>{{topic.room_set.all.count}}</span></a>
     </li>
       {% endfor %}
 
