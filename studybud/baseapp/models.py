@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class User(AbstractUser):
+    avatar = models.ImageField(null=True, default="avatar.svg")
     name = models.CharField(max_length=255, null=True)
     email = models.EmailField(unique=True)
     bio = models.TextField(null=True)
@@ -25,6 +26,9 @@ class Room(models.Model):
     description = models.TextField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ["-created"]
+
     def __str__(self):
         return self.name
 
@@ -33,6 +37,9 @@ class Message(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
     messages = models.CharField(max_length=255, null=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created"]
 
     def __str__(self):
         return self.messages

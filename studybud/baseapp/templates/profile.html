@@ -11,13 +11,15 @@
         <div class="profile">
           <div class="profile__avatar">
             <div class="avatar avatar--large active">
-              <img src="https://randomuser.me/api/portraits/men/11.jpg" />
+              <img src="{{user.avatar.url}}" />
             </div>
           </div>
           <div class="profile__info">
             <h3>{{user.username}}</h3>
             <p>@{{user.username}}</p>
-            <a href="edit-user.html" class="btn btn--main btn--pill">Edit Profile</a>
+            {% if user == request.user %}
+             <a href="/settings" class="btn btn--main btn--pill">Edit Profile</a>
+            {% endif %}
           </div>
           <div class="profile__about">
             <h3>About</h3>
@@ -38,9 +40,9 @@
         {% for room in rooms %}
         <div class="roomListRoom">
           <div class="roomListRoom__header">
-            <a href="profile.html" class="roomListRoom__author">
+            <a href="/profile/{{room.host.id}}" class="roomListRoom__author">
               <div class="avatar avatar--small active">
-                <img src="https://randomuser.me/api/portraits/men/11.jpg" />
+                <img src="{{room.host.avatar.url}}" />
               </div>
               <span>{{user.username}}</span>
             </a>
@@ -50,7 +52,7 @@
             </div>
           </div>
           <div class="roomListRoom__content">
-            <a href="room.html">{{room.name}}</a>
+            <a href="/room/{{room.id}}">{{room.name}}</a>
             <p>
               {{room.description}}
             </p>
