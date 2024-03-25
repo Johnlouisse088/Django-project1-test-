@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
@@ -96,7 +97,7 @@ def profile(request, id):
         "rooms": rooms
     }
     return render(request, "profile.html", context)
-
+@login_required(login_url="login")
 def room(request, id):
     rooms = Room.objects.all().get(id=id)
     if request.method == "POST":
@@ -118,7 +119,7 @@ def room(request, id):
     }
     return render(request, "room.html", context)
 
-
+@login_required(login_url="login")
 def create_room(request):
     topics = Topic.objects.all()
     form = RoomForm()
